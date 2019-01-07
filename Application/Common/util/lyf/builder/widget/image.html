@@ -1,0 +1,31 @@
+<case value="image">
+    <div class="form-group item_{$[type]form.name} {$[type]form.extra.class|default=''}">
+        <label class="left control-label">
+            <?php if($[type]form['extra']['must']): ?>
+                <span style="color: red;">*</span>
+            <?php endif; ?>
+            <span>{$[type]form.title}：</span>
+        </label>
+        <div class="right row">
+            <div  id="[type]{$group_k|default=''}_upload_box_{$[type]k}" class="wu-example">
+                <!--用来存放文件信息-->
+                <div id="[type]{$group_k|default=''}_upload_list_{$[type]k}" class="uploader-list col-xs-12 img-box">
+                    <notempty name="[type]form.value">
+                        <div id="[type]{$group_k|default=''}_upload_preview_{$[type]k}" class="col-xs-6 col-sm-3 file-item thumbnail">
+                            <i class="fa fa-times-circle remove-picture"></i>
+                            <img src="{$[type]form.value|get_uploadfilecover}" data-id="{$[type]form.value|default=''}">
+                        </div>
+                    <else />
+                        <div id="[type]{$group_k|default=''}_upload_preview_{$[type]k}" class="col-sm-3 file-item thumbnail hidden">
+                            <i class="fa fa-times-circle remove-picture"></i>
+                            <img>
+                        </div>
+                    </notempty>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</case>

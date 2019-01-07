@@ -1,0 +1,259 @@
+<extend name="$_admin_public_layout"/>
+
+<block name="style">
+    <script src="__LYUI__/js/jquery.min.js"></script>
+    <script src="__LYUI__/js/bootstrap.min.js"></script>
+    <script src="__LYUI__/js/vue.js"></script>
+    <style>
+        .cat-box {
+
+        }
+
+        .cat-box .row {
+            margin: 0;
+            padding: 0;
+        }
+
+        .cat-box .col-6 {
+            padding: 0;
+        }
+
+        .cat-box .cat-list {
+            border-right: 1px solid rgba(0, 0, 0, .15);
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 15rem;
+        }
+
+        .cat-box .cat-item {
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            padding: .5rem 1rem;
+            display: block;
+            margin: 0;
+        }
+
+        .cat-box .cat-item:last-child {
+            border-bottom: none;
+        }
+
+        .cat-box .cat-item:hover {
+            background: rgba(0, 0, 0, .05);
+        }
+
+        .cat-box .cat-item.active {
+            background: rgb(2, 117, 216);
+            color: #fff;
+        }
+
+        .cat-box .cat-item input {
+            display: none;
+        }
+
+        .modal-backdrop.show {
+            opacity: 0.5;
+        }
+        .modal.show .modal-dialog {
+            -webkit-transform: translate(0,0);
+            -o-transform: translate(0,0);
+            transform: translate(0,0);
+        }
+        .modal.fade .modal-dialog {
+            -webkit-transition: -webkit-transform .3s ease-out;
+            transition: -webkit-transform .3s ease-out;
+            -o-transition: -o-transform .3s ease-out;
+            transition: transform .3s ease-out;
+            transition: transform .3s ease-out,-webkit-transform .3s ease-out,-o-transform .3s ease-out;
+            -webkit-transform: translate(0,10%);
+            -o-transform: translate(0,10%);
+            transform: translate(0,10%);
+        }
+
+        @media (min-width: 576px){
+            .modal-dialog {
+                max-width: 500px;
+                margin: 30px auto;
+            }
+        }
+        .modal-dialog {
+            position: relative;
+            width: auto;
+
+        }
+    </style>
+    <include file="./Application/Common/util/lyf/builder/style.html" />
+</block>
+
+<block name="main">
+    <div class="panel-body">
+        <include file="$_listbuilder_layout" builderpath="./Application/Common/util/lyf/builder" />
+    </div>
+</block>
+
+<block name="script">
+    <div id="page">
+
+        <div id="catModal" tabindex="-1" role="dialog" aria-labelledby="catModalLabel" class="modal fade" style="display: none;">
+            <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"><b>选择分类</b>
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cat-box">
+                            <div class="row">
+                                <div class="col-sm-12" style="padding-right:0">
+                                    <select name="cid2" id="cid2" class="form-control lyui-select select" >
+                                        <option value=''>请选择： </option>
+                                        <foreach name="formoptions" item="option" key="option_key">
+                                            <php>if(is_array($option)):</php>
+                                            <option value="{$option_key}" <?php if(isset($form['value']) && ($form['value'] == $option_key)) echo 'selected'; ?>
+                                            <foreach name="option" item="option2" key="option_key2">
+                                                {$option_key2}="{$option2}"
+                                            </foreach>>
+                                            {$option.title}
+                                            </option>
+                                            <php>else:</php>
+                                            <option value="{$option_key}" <?php if(isset($form['value']) && ($form['value'] == $option_key)) echo 'selected'; ?>>{$option}</option>
+                                            <php>endif;</php>
+                                        </foreach>
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary">关闭</button>
+                        <button type="button" class="btn btn-primary cat-confirm">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="selectpictip" tabindex="-1" role="dialog" aria-labelledby="catModalLabel" class="modal fade" style="display: none;">
+            <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"><b>请先选择</b>
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cat-box">
+                            <div class="row">
+                                <div class="col-sm-12" style="padding-right:0">
+                                    <div>请选择要操作的图片</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+        var page = new Vue({
+            el: "#page",
+            data: {
+                sub_cat_list: [],
+                attr_group_list: JSON.parse('[{"attr_group_name":"颜色","attr_list":[{"attr_name":"红"},{"attr_name":"白"}]}]'),//可选规格数据
+                checked_attr_list: JSON.parse('[{"attr_list":[{"attr_id":84,"attr_name":"红","attr_group_name":"颜色"}],"num":12,"price":1,"no":"","pic":""},{"attr_list":[{"attr_id":85,"attr_name":"白","attr_group_name":"颜色"}],"num":22,"price":1,"no":"","pic":""}]'),//已选规格数据
+                goods_card_list: [],
+                card_list: [],
+                goods_cat_list:[{"cat_id":12,"cat_name":"保姆","is_service":1}],
+                select_i: ''
+            },
+            methods: {
+                change: function (item, index) {
+                    this.checked_attr_list[index] = item;
+                }
+            }
+        });
+
+
+        $(document).on("change", ".cat-item input", function () {
+            if ($(this).prop("checked")) {
+                $(".cat-item").removeClass("active");
+                $(this).parent(".cat-item").addClass("active");
+            } else {
+                $(this).parent(".cat-item").removeClass("active");
+            }
+        });
+
+        $(document).on("change", ".parent-cat-list input", function () {
+            getSubCatList();
+        });
+
+
+        function getSubCatList() {
+            var parent_id = $(".parent-cat-list input:checked").val();
+            page.sub_cat_list = [];
+            $.ajax({
+                url: "/addons/zjhj_mall/core/web/index.php?r=mch%2Fgoods%2Fget-cat-list",
+                data: {
+                    parent_id: parent_id,
+                },
+                success: function (res) {
+                    if (res.code == 0) {
+                        page.sub_cat_list = res.data;
+                    }
+                }
+            });
+        }
+        $('#catModal').on('show.bs.modal', function () {
+            var option = $(".ids");
+            var ids=[];
+            option.each(function() {
+                if (this.checked) {
+                    ids.push(this.value)
+                }
+            });
+
+            if(ids.length==0)
+            {
+                $("#selectpictip").modal("show");
+                return false;
+            }
+
+        })
+
+        //选择分类
+        $(document).on("click", ".cat-confirm", function () {
+
+            var cat_id = $("#cid2").val();
+            var option = $(".ids");
+            var ids=[];
+            option.each(function() {
+                if (this.checked) {
+                    ids.push(this.value)
+                }
+            });
+
+
+
+            page.sub_cat_list = [];
+            $.ajax({
+                url: "/admin.php?s=/site/picture/setstatus/status/changecatagory/model/Picture.html",
+                data: {
+                    parent_id: cat_id,
+                    ids:ids
+                },
+                success: function (res) {
+                   $.alertMessager(res.info, "success");
+                   location.reload();
+                }
+            });
+
+
+
+            $("#catModal").modal("hide");
+        });
+
+
+    </script>
+    <include file="./Application/Common/util/lyf/builder/javascript.html" />
+</block>

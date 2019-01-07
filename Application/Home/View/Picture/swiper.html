@@ -1,0 +1,73 @@
+<extend name="$_home_public_layout"/>
+
+
+
+<block name="footer"></block>
+<block name="style">
+    <script type="text/javascript" src="__JS__/jquery.lazyload.js" ></script>
+    <link rel="stylesheet" href="__HOME_CSS__/swiper.min.css">
+
+</block>
+
+<block name="full-container">
+
+
+
+<!-- Swiper -->
+<div class="swiper-container">
+    <div class="swiper-wrapper" style="display: flex; align-items: center;">
+        <volist name="form"   id="vo">
+             <div class="swiper-slide">
+                 <img class="imgclass  lazy"  src="__HOME_IMG__/moyalog.jpg"  id="{$vo.id}" data-original="{$vo.pic.url_result}" style="width:100%;height:650px;margin: 0px;padding: 5px;">
+
+                 </img>
+             </div>
+        </volist>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination" style="position: static;"></div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+
+</block>
+<block name="myscript">
+    <script src="__JS__/swiper.min.js"></script>
+    <script>
+        $('img.lazy').lazyload({
+            placeholder : "img/grey.gif",
+            effect: "fadeIn",
+            threshold: 0,
+            failurelimit: 10
+        });
+    var swiper = new Swiper('.swiper-container', {
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        on: {
+            slideChangeTransitionStart: function(){
+                $('img.lazy').lazyload({
+                    placeholder : "img/grey.gif",
+                    effect: "fadeIn",
+                    threshold: 100,
+                    failurelimit: 10
+                });
+            },
+        },
+        initialSlide : $(".imgclass").index($("#{$id}")),
+    });
+
+</script>
+</block>
+
+
+<!-- Initialize Swiper -->
+
+

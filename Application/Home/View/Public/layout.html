@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <block name="title"><title>{$meta_title}｜{:C('WEB_SITE_TITLE')}{:C('WEB_SITE_SLOGAN')}</title></block>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="author" content="{:C('WEB_SITE_TITLE')}">
+    <meta name="keywords" content="{$meta_keywords}">
+    <meta name="description" content="{$meta_description}">
+    <meta name="generator" content="魔娅">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="{:C('WEB_SITE_TITLE')}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <block name="toplinkscript">
+        <link rel="shortcut icon" type="image/x-icon" href="__ROOT__/favicon.ico">
+        <link rel="apple-touch-icon" type="image/x-icon" href="__ROOT__/logo.png">
+        <link rel="stylesheet" type="text/css" href="__HOME_CSS__/home.css">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/libs/animate/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="__LYUI__/css/lyui.min.css">
+        <link rel="stylesheet" type="text/css" href="__HOME_CSS__/aui.css" />
+        <link rel="stylesheet" type="text/css" href="__HOME_CSS__/aui-slide.css"/>
+        <link rel="stylesheet" type="text/css" href="__HOME_CSS__/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="__HOME_CSS__/bootstrap-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="__HOME_CSS__/moya.css"/>
+        <script type="text/javascript" src="__JS__/jquery-3.3.1.min.js" ></script>
+        <script type="text/javascript" src="__JS__/api.js"></script>
+        <script type="text/javascript" src="__JS__/aui-tab.js" ></script>
+        <script type="text/javascript" src="__JS__/aui-slide.js"></script>
+        <script type="text/javascript" src="__JS__/power-slider.min.js"></script>
+        <script type="text/javascript" src="__JS__/aui-dialog.js"></script>
+        <script type="text/javascript" src="__JS__/doT.min.js"></script>
+        <script type="text/javascript" src="__JS__/config.js"></script>
+        <script type="text/javascript" src="__JS__/common.js"></script>
+        <script type="text/javascript" src="__JS__/moya.js"></script>
+        <script type="text/javascript" src="__JS__/admin.js"></script>
+        <script type="text/javascript" src="__LYUI__/js/lyui.min.js"></script>
+        <script type="text/javascript" src="__HOME_JS__/home.js"></script>
+    </block>
+<style>
+    body{
+        max-width: 800px;
+    }
+</style>
+    <block name="style">
+
+    </block>
+
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        window.jQuery || document.write('<script type="text/javascript" src="__PUBLIC__/libs/jquery/1.x/jquery.min.js"><\/script>');
+        window.lingyun = {
+            "app_debug"     : "<?php echo C('app_debug'); ?>",
+            "app_debug_msg" : "调试模式已关闭",
+            "top_home_page" : "{:C('TOP_HOME_PAGE')}",
+            "home_page"     : "{:C('HOME_PAGE')}",
+            "var_root "     : "__ROOT__",
+            "default_img"   : "{:get_cover('', 'default')}"
+        }
+    </script>
+</head>
+<body class="{$_page_name}" >
+<div style="display: flex;justify-content: center;margin: 0px;padding: 0px" class="col-xs-12 " >
+
+    <div class="col-xs-12" style="margin: 0px;padding: 0px">
+        <block name="hook_page_header">
+            <div class="clearfix hook hook-page-header">
+                {:hook('PageHeader')} <!-- 文档开始钩子 -->
+            </div>
+        </block>
+        <block name="topnav"><!-- 文档上面蓝标题 -->
+            <div class="navbar theme-white" style="background: #3399ff;text-align: center;color: #fff;font-size: larger;height: 44px;padding: 0px;margin: 0px;border: 0px;min-height: 44px;">
+                <div class="navbar-inner" style="padding: 0 8px;width: 100%px;">
+                    <div class="left" style="height: 0px;display: flex">
+                        <a href="#" class="link back icon-only" onclick="history.back();return false;">
+                            <i class="fa fa-angle-left" style="font-size: 17px;font-weight: 700;line-height: 44px;display: block;color: #fff;"></i>
+                        </a>
+                    </div>
+                    <div class="center" style="line-height: 44px;font-size: larger">{$title}</div>
+
+                </div>
+            </div>
+        </block>
+        <block name="main">
+
+        </block>
+
+
+        <block name="hook_page_footer">
+            <div class="clearfix hook hook-page-footer">
+                {:hook('PageFooter')} <!-- 文档末尾钩子 -->
+            </div>
+        </block>
+        <block name="jumbotron"></block>
+        <div class="clearfix full-container" id="full-container">
+            <block name="full-container">
+
+            </block>
+        </div>
+
+
+        <block name="footer">
+
+       <div style="height: 40px"></div>
+            <div class="container">
+                <div class="row">
+                    <footer class="aui-bar aui-bar-tab col-xs-12" style="position: fixed;max-width:800px;" id="footer">
+                        <div class="aui-bar-tab-item aui-active " tapmode>
+                            <i class="aui-iconfont aui-icon-home" style="font-size: 18px"></i>
+                            <div class="aui-bar-tab-label"  style="font-size: 14px">首页</div>
+                        </div>
+                        <div class="aui-bar-tab-item  " tapmode>
+                            <i class="aui-iconfont aui-icon-star" style="font-size: 18px"></i>
+                            <div class="aui-bar-tab-label"   style="font-size: 14px">分类</div>
+                        </div>
+                        <div class="aui-bar-tab-item  " tapmode>
+                            <i class="aui-iconfont aui-icon-my" style="font-size: 18px"></i>
+                            <div class="aui-bar-tab-label"   style="font-size: 14px">我的</div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+        </block>
+
+        <script>
+
+
+            $(function(){
+
+                setTimeout(function () {
+                    $('#categoryContent div:first-child').removeClass('aui-hide');
+                },3000);
+
+                //$('#category .tab').firstChild().addClass('.aui-active');
+            });
+
+            //分类的获取
+            function getCategory(){
+                var param = {};
+                param.url = Config.api.Category;
+                param.data = {
+                    'parent_id' : 1
+                };
+                ajax(param,function (ret) {
+                    if(ret.code == 1){
+                        $('#categoryContent').html('');
+                        //赋值
+                        var html = '';
+                        $.each(ret.data,function (i,val) {
+                            html += ' <div class="tab">'+val['name']+'</div>';
+
+                            var param2= {};
+                            param2.url = Config.api.CategoryList;
+                            param2.data = {
+                                'category_id' :val['id']
+                            };
+                            ajax(param2,function (ret2) {
+                                if(ret2.code == 1){
+                                    var html2 = '';
+                                    $.each(ret2.data,function (i2,val2) {
+                                        html2 += '<div class="tab-content aui-text-center aui-hide">';
+                                        html2 += '<div class="aui-col-xs-6 aui-padded-10" onclick="details('+val2['id']+');">';
+                                        html2 += '<div><img src="'+val2['more']['thumbnail']+'"></div>';
+                                        html2 += '<div>'+val2['post_title']+'</div>';
+                                        html2 += '</div>';
+                                        html2 += '</div>';
+                                    });
+                                    $('#categoryContent').append(html2);
+                                }else{
+                                    // layer.msg(ret.msg);
+                                }
+                            });
+
+
+                            // html = 1;
+                        });
+                        $('#category').html(html);
+                        // dotTpl('dotCategory', 'category', ret.data);
+
+                        //左右tab
+                        var tab = new auiTab({
+                            element:document.getElementById("category")
+                        },function(ret2){
+                            console.log(ret2);
+                            $('.category-content .tab-content').addClass('aui-hide').eq(ret2.index-1).removeClass('aui-hide');
+                        });
+
+                        //css相关处理
+                        $('#category .tab').removeClass('aui-active');
+                        $('#category .tab:first-child').addClass('aui-active');
+                        $('#categoryContent div:first-child').removeClass('aui-hide');
+                    }else{
+                        layer.msg(ret.msg);
+                    }
+                });
+            }
+             function office() {
+                window.location.href = "/home/picture/categoryfirst/cid/0.html";
+            }
+
+        </script>
+        <block name="myscript">
+
+            <script>
+
+                var tab = new auiTab({
+                    element:document.getElementById("footer"),
+                    index:3,
+                    repeatClick:true
+                },function(ret){
+                    switch (ret.index){
+                        case 1:
+                            window.location.href = "/home/index/index.html";
+                            break;
+                        case 2:
+                            window.location.href = "/home/picture/categoryfirst/cid/0.html";
+                            break;
+                        case 3:
+                            window.location.href = "/home/my/index.html";
+                            break;
+                    }
+                });
+
+            </script>
+
+        </block>
+        <block name="full_script">
+
+
+            <script type="text/javascript">
+                $(function() {
+                    // 主导航如果没有当前URL完全一致的页面则高亮当前页面所在的模块
+                    var $nav_list = $(".main-nav .navbar-right");
+                    var $current = $nav_list.find("li.active");
+                    if ($current.length == 0) {
+                        var url = "<?php echo U('/'.request()->module(), '', true, true); ?>";
+                        $('.navbar li a[href="' + url + '"]').closest('li').addClass('active');
+                    }
+                });
+
+            </script>
+            <block name="script"></block>
+            {:C('WEB_SITE_STATISTICS')} <!-- 站点统计代码 -->
+
+        </block>
+    </div>
+</div>
+</body>
+</html>

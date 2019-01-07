@@ -1,0 +1,151 @@
+<extend name="$_home_public_layout"/>
+
+<block name="style">
+    <script type="text/javascript" src="__JS__/jquery.lazyload.min.js" ></script>
+    <style>
+        .catagoryimg{
+            border-radius: 15px;
+            width:170px;
+            height:120px;
+            margin: 0 auto;
+            padding: 5px;
+            max-height: 200px;
+        }
+        .img1{
+            margin: 0 auto;
+            width:170px;
+            padding: 5px;
+            max-height: 200px;
+        }
+    </style>
+</block>
+
+<block name="full-container">
+
+    <!-- 背景 -->
+    <eq name="type" value="cid">
+        <div style="height: 20px"></div>
+        <volist name="form"   id="vo">
+
+
+            <?php if($j%2==0): ?>
+            <div class="row col-xs-12 " style="margin: 0px auto;padding: 0;">
+                <?php endif; ?>
+
+                <div class="aui-list-item  " style="margin: 0 10px;">
+                    <div  style="line-height: 50px;margin: 0 auto;padding: 0px;" class="col-xs-6" >
+                        <a href="/home/picture/category/cid/{$vo.id}.html">
+                            <img   class="catagoryimg"     src="{$vo.cover_url}">
+                        </a>
+                         <div style="line-height:15px; text-align:center">  {$vo.title} </div>
+                    </div>
+                </div>
+
+                <?php   if($j%2!=0): ?>
+            </div >
+            <?php endif;$j++;   ?>
+
+
+        </volist>
+        </eq>
+    <eq name="type" value="pic">
+        <?php $j=0 ?>
+
+        <volist name="form"   id="vo">
+            <?php   if($j%2==0): ?>
+            <div class="row col-xs-12 " style="margin: 5px auto;padding: 0;">
+                <?php  endif; ?>
+
+                <div class="aui-list-item  " style="margin: 10px;">
+                    <div  style="line-height: 50px;margin: 0 auto;padding: 0px;" class="col-xs-6" >
+                        <a href="/home/picture/swiper/cid/{$vo.cid}/id/{$vo.id}.html">
+                            <img class="img1 lazy  "  src="__HOME_IMG__/moyalog.jpg" data-original="{$vo.pic.url_result}"></img>
+                        </a>
+                        <notempty name="vo.psdid">
+                            <a class="btn btn-danger-outline btn-pill  " href="/home/picture/downloadpsd/id/{$vo.psdid}.html" style="position: absolute;border:1px #3399ff;background-color: #ffffff ;border-radius: 10px;">下载psd</a>
+                        </notempty>
+
+                        <div style="line-height:15px; text-align:center"> {$vo.name } </div>
+                    </div>
+                </div>
+                <?php   if($j%2!=0): ?>
+            </div >
+            <?php endif;$j++;   ?>
+
+        </volist>
+    </eq>
+
+    <!--one/start-->
+
+
+    <div class="row col-xs-12 " style="height:40px;margin: 5px auto;padding: 0;"></div>
+
+
+</block>
+
+
+<block name="full_script">
+    <div class="clearfix full-script">
+        <div class="container-fluid">
+
+            <script type="text/javascript">
+                $(function() {
+                    // 主导航如果没有当前URL完全一致的页面则高亮当前页面所在的模块
+                    var $nav_list = $(".main-nav .navbar-right");
+                    var $current = $nav_list.find("li.active");
+                    if ($current.length == 0) {
+                        var url = "<?php echo U('/'.request()->module(), '', true, true); ?>";
+                        $('.navbar li a[href="' + url + '"]').closest('li').addClass('active');
+                    }
+                });
+
+
+                // alert($(".btn-danger-outline").position().top+"aaa"+$(".btn-danger-outline").position().left);
+                $width= $(".btn-danger-outline").prev().children("img").width();
+                $height=$(".btn-danger-outline").prev().children("img").height();
+                //.css("left","200px");
+                $widthparent= $(".btn-danger-outline").parent().width();
+                $heightparent= $(".btn-danger-outline").parent().height();
+
+                $(".btn-danger-outline").css("right",($widthparent-$width+10));
+                $(".btn-danger-outline").css("bottom",($heightparent-$height+10));
+                // alert($(".img1").width()+"aaa"+$(".img1").height());
+
+
+            </script>
+
+            {:C('WEB_SITE_STATISTICS')} <!-- 站点统计代码 -->
+        </div>
+    </div>
+
+
+</block>
+
+<block name="myscript">
+
+    <script>
+
+        $('img.lazy').lazyload();
+        var tab = new auiTab({
+            element:document.getElementById("footer"),
+            index:2,
+            repeatClick:true
+        },function(ret){
+            switch (ret.index){
+                case 1:
+                    window.location.href = "/home/index/index.html";
+                    break;
+                case 2:
+                    window.location.href = "/home/picture/categoryfirst/cid/0.html";
+                    break;
+                case 3:
+                    window.location.href = "/home/my/index.html";
+                    break;
+            }
+        });
+
+    </script>
+
+</block>
+
+

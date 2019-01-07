@@ -1,0 +1,305 @@
+<extend name="$_home_public_layout"/>
+
+<block name="full-container">
+    <!--one/start-->
+    <div style="background: url(/Uploads/admin/image/2018-06-06/my.jpg);height: 800px;margin: 0 auto; ">
+    <div class="ucenter-bg text-center bg-opencmf" style="z-index: 999;padding: 15px ;">
+        <div class="avatar" style="margin: auto">
+            <img src="{$avatar}" style="border-radius: 50%;margin:0 auto;padding: 0px;" width="80" height="80" class="">
+
+               </div>
+
+        <div  style="color:#fff;margin: auto;padding:8px;">         {$nickname}            </div>
+    </div>
+    <!--one/end-->
+
+    <!--two/start-->
+        <div class="aui-content aui-margin-b-15 col-xs-11" style="float: none;margin: 0 auto">
+            <ul class="aui-list aui-list-in">
+
+                <!--start-->
+                <li class="aui-list-item aui-list-item-arrow"  onclick="personal_details()">
+                    <div class="aui-list-item-inner" >
+                        <div class="aui-list-item-title" ><i class="aui-iconfont aui-icon-question"></i>&nbsp;个人信息</div>
+                    </div>
+                </li>
+                <!--end-->
+
+                <!--start-->
+                <li class="aui-list-item aui-list-item-arrow" onclick="uploadImg();">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-title"><i class="aui-iconfont aui-icon-paper"></i>&nbsp;上传图片</div>
+                    </div>
+                </li>
+                <!--end-->
+
+                <!--start-->
+                <li class="aui-list-item aui-list-item-arrow" onclick="uploadManage();">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-title">  <i class="aui-iconfont aui-icon-image"></i>&nbsp;上传图片管理</div>
+                    </div>
+                </li>
+                <!--end-->
+            </ul>
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-block" onclick="logOut()">退出登录</div>
+            </div>
+        </div>
+    </div>
+</block>
+
+
+<block name="full_script">
+    <div class="clearfix full-script">
+        <div class="container-fluid">
+
+            <script type="text/javascript">
+                $(function() {
+                    // 主导航如果没有当前URL完全一致的页面则高亮当前页面所在的模块
+                    var $nav_list = $(".main-nav .navbar-right");
+                    var $current = $nav_list.find("li.active");
+                    if ($current.length == 0) {
+                        var url = "<?php echo U('/'.request()->module(), '', true, true); ?>";
+                        $('.navbar li a[href="' + url + '"]').closest('li').addClass('active');
+                    }
+                });
+
+            </script>
+
+            {:C('WEB_SITE_STATISTICS')} <!-- 站点统计代码 -->
+        </div>
+    </div>
+
+</block>
+
+<script type="text/javascript" src="__JS__/api.js"></script>
+<script type="text/javascript" src="__JS__/aui-tab.js" ></script>
+<script type="text/javascript" src="__JS__/aui-slide.js"></script>
+<script type="text/javascript" src="__JS__/power-slider.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="__JS__/doT.min.js"></script>
+<script type="text/javascript" src="__JS__/config.js"></script>
+<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="__JS__/moya.js"></script>
+<script type="text/javascript" src="__JS__/aui-dialog.js"></script>
+
+
+
+
+
+
+<a data-toggle="modal" href="#login-modal" style="display: none;">
+    <i class="fa fa-sign-in"></i>
+    <span>登录/注册</span>
+</a>
+<block name="myscript">
+    <script>
+
+
+
+        //分类的获取
+        function getCategory(){
+            var param = {};
+            param.url = Config.api.Category;
+            param.data = {
+                'parent_id' : 1
+            };
+            ajax(param,function (ret) {
+                if(ret.code == 1){
+                    $('#categoryContent').html('');
+                    //赋值
+                    var html = '';
+                    $.each(ret.data,function (i,val) {
+                        html += ' <div class="tab">'+val['name']+'</div>';
+
+                        var param2= {};
+                        param2.url = Config.api.CategoryList;
+                        param2.data = {
+                            'category_id' :val['id']
+                        };
+                        ajax(param2,function (ret2) {
+                            if(ret2.code == 1){
+                                var html2 = '';
+                                $.each(ret2.data,function (i2,val2) {
+                                    html2 += '<div class="tab-content aui-text-center aui-hide">';
+                                    html2 += '<div class="aui-col-xs-6 aui-padded-10" onclick="details('+val2['id']+');">';
+                                    html2 += '<div><img src="'+val2['more']['thumbnail']+'"></div>';
+                                    html2 += '<div>'+val2['post_title']+'</div>';
+                                    html2 += '</div>';
+                                    html2 += '</div>';
+                                });
+                                $('#categoryContent').append(html2);
+                            }else{
+                                //layer.msg(ret.msg);
+                            }
+                        });
+
+
+                        // html = 1;
+                    });
+                    $('#category').html(html);
+                    // dotTpl('dotCategory', 'category', ret.data);
+
+                    //左右tab
+                    var tab = new auiTab({
+                        element:document.getElementById("category")
+                    },function(ret2){
+                        console.log(ret2);
+                        $('.category-content .tab-content').addClass('aui-hide').eq(ret2.index-1).removeClass('aui-hide');
+                    });
+
+                    //css相关处理
+                    $('#category .tab').removeClass('aui-active');
+                    $('#category .tab:first-child').addClass('aui-active');
+                    $('#categoryContent div:first-child').removeClass('aui-hide');
+                }else{
+                    //yer.msg(ret.msg);
+                }
+            });
+        }
+
+
+
+        function office() {
+            window.location.href = "/home/picture/categoryfirst/cid/0.html";
+        }
+
+
+        // 个人信息
+        function personal_details(obj){
+            window.location.href = "/home/my/edit.html";
+        }
+
+        // 上传图片
+        function uploadImg() {
+            window.location.href = '/home/Picture/add.html';
+        }
+
+        // 上传头像
+        function uploadAvatar() {
+            window.location.href = './modify_avatar.html';
+        }
+
+        // 上传图像管理
+        function uploadManage() {
+            window.location.href = '/picture/upload_manage.html';
+        }
+
+        function details(id) {
+            sessionStorage.setItem('id',id);
+            window.location.href = "../index/details.html";
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+
+
+    /**
+     * 底部切换
+     */
+    var tab = new auiTab({
+        element:document.getElementById("footer"),
+        index:3,
+        repeatClick:false
+    },function(ret){
+        switch (ret.index){
+            case 1:
+                window.location.href = "/home/index/index.html";
+                break;
+            case 2:
+                window.location.href = "/home/picture/categoryfirst.html";
+                break;
+            case 3:
+                window.location.href = "/home/my/index.html";
+                break;
+        }
+    });
+
+    //幻灯片的获取
+    function slideList(){
+        var param = {};
+        param.url = Config.api.Toolsslides;
+        param.data = {
+            'id' : 1
+        };
+        ajax(param,function (ret) {
+            if(ret.code == 1){
+                var dataInter = ret.data[0].items;
+
+                var slide = new auiSlide({
+                    container:document.getElementById("aui-slide"),
+                    "height":150,
+                    "speed":300,
+                    "autoPlay": 5000, //自动播放
+                    "pageShow":true,
+                    "loop":true,
+                    "pageStyle":'dot',
+                    'dotPosition':'center'
+                });
+            }else{
+                // layer.msg(ret.msg);
+            }
+        },false,true)
+    }
+
+    //获取资讯
+    function getNews(){
+        var param = {};
+        param.url = Config.api.NewsList;
+        param.data = {
+            'field':'id,post_title',
+            'limit':4
+        };
+        ajax(param,function (ret) {
+            console.log(ret);
+            if(ret.code == 1){
+                var html="";
+                $.each(ret.data,function (index,item) {
+                    html += "<li onclick='details("+item['id']+")'>"+item['post_title']+"</li>";
+                });
+                $("#scrolltext").append(html);
+            }else{
+                // layer.msg(ret.msg);
+            }
+        },false,true)
+    }
+
+    //详情
+    function details(id) {
+        sessionStorage.setItem('id',id);
+        window.location.href = "../home/details.html";
+    }
+
+
+
+    //代理商图库
+    function agent() {
+        window.location.href = '../category/agent.html';
+    }
+    /**
+     * 退出
+     */
+    function logOut(){
+        var dialog = new auiDialog({})
+        dialog.alert({
+            msg:'确定要退出登录吗？',
+            buttons:['取消','确定']
+        },function(ret){
+            if(ret.buttonIndex==2){
+                //发起ajax发起退出登录请求
+                ajax({url:Config.api.UserLoginOut,data:{} },function(data){
+                    if (data.code == 1) {
+                        //清空session跳转到登录页面
+                        sessionStorage.clear();
+                        window.location.href="../login/login.html";
+                    }
+                })
+            }
+        })
+    }
+
+</script>
+</block>
+

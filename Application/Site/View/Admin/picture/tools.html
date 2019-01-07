@@ -1,0 +1,30 @@
+<extend name="$_admin_public_layout"/>
+
+<block name="style">
+    <script src="__LYUI__/js/jquery.min.js"></script>
+    <script src="__LYUI__/js/bootstrap.min.js"></script>
+    <script src="__LYUI__/js/vue.js"></script>
+    <style>
+        .pngtojpg{
+            margin: 50px;
+        }
+    </style>
+    <include file="./Application/Common/util/lyf/builder/style.html" />
+    <script language="JavaScript">
+        function delete_confirm(e)
+        {
+            if (event.srcElement.outerText == "png转jpg")
+            {
+                event.returnValue = confirm("png转jpg是不可恢复的，你确认要转换吗？");
+            }
+        }
+        document.onclick = delete_confirm;
+    </script>
+</block>
+<block name="main">
+     <a type="addnew" title=" png转jpg" class="btn btn-primary-outline btn-pill confirm pngtojpg" href="/admin.php?s=/site/picture/tools/action/pngtojpg.html">
+    png转jpg</a>
+    <a type="addnew" title="清理无用图片" class="btn btn-primary-outline btn-pill confirm pngtojpg" href="/admin.php?s=/site/picture/tools/action/cleanuploadfile.html">
+        清理无用图片</a>
+</block>
+

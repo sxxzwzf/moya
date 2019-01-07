@@ -1,0 +1,125 @@
+<extend name="$_home_public_layout"/>
+
+<block name="full-container">
+    <!--one/start-->
+
+
+
+
+    
+    <!--one/end-->
+
+    <!--two/start-->
+    <div class="aui-content aui-margin-b-15">
+
+
+            <!--start-->
+            <volist name="listtree" id="vo">
+
+
+                        <div class="row col-xs-12 " style="margin: 5px auto;padding: 5px;">
+
+                            <li class="aui-list-item aui-list-item-arrow" onclick="personal_details()">
+                                <div class="aui-list-item-inner" style="padding: 0px;margin: 0px;">
+                                    <div class="aui-list-item-title col-xs-12" style="display: flex;align-items: center">
+                                        <img  style="width:16px;height:10px" src="{$vo.cover_url}" ></img>
+                                       {$vo.title_show}</div>
+                                </div>
+                            </li>
+                        </div>
+
+                         <?php $j=0 ?>
+
+                              <volist name="vo['picdata']" id="sub">
+
+
+                                  <?php if($j%2==0): ?>
+                                  <div class="row col-xs-12 " style="margin: 0px auto;padding: 0;">
+                                      <?php endif; ?>
+
+                                      <div class="aui-list-item  " style="margin: 0 10px;">
+                                          <div  style="line-height: 50px;margin: 0 auto;padding: 0px;" class="col-xs-6" >
+                                              <a>
+                                                  <img    style="width:170px;margin: 0px;padding: 5px; max-height: 200px;"" src="{$sub.url}">
+                                              </a>
+                                              <a type="delete" title="删除" target-form="ids"  style="position: absolute;background-color:#fff;border:1px #3399ff solid;border-radius: 10px;"   class="btn btn-danger-outline btn-pill ajax-get confirm" model="Picture" href="/home/picture/delete/status/delete/ids/{$sub.id}.html" autocomplete="off"><i class="fa fa-close"></i> 删除</a>
+                                              <div style="line-height:15px; text-align:center">  {$sub.name} </div>
+                                          </div>
+                                      </div>
+
+                                      <?php   if($j%2!=0): ?>
+                                  </div >
+                                  <?php endif;$j++;   ?>
+
+                              </volist>
+
+
+
+            </volist>
+            <!--end-->
+
+
+<empty name="listtree">
+
+    <php>$tdcolspan = count($table_column_list)+1</php>
+    <div style="width:100%;height:100%;text-align: center" >
+        <br><br><br><br><br><br><br>
+        <i class="fa fa-database"></i> 暂时没有数据<br>
+
+    </div>
+</empty>
+
+    </div>
+
+    <div style="height:80px;clear: both;"></div>
+
+</block>
+
+
+<block name="full_script">
+    <div class="clearfix full-script">
+        <div class="container-fluid">
+
+            <script type="text/javascript">
+                $(function() {
+                    // 主导航如果没有当前URL完全一致的页面则高亮当前页面所在的模块
+                    var $nav_list = $(".main-nav .navbar-right");
+                    var $current = $nav_list.find("li.active");
+                    if ($current.length == 0) {
+                        var url = "<?php echo U('/'.request()->module(), '', true, true); ?>";
+                        $('.navbar li a[href="' + url + '"]').closest('li').addClass('active');
+                    }
+                });
+
+
+
+                // alert($(".btn-danger-outline").position().top+"aaa"+$(".btn-danger-outline").position().left);
+                $width= $(".btn-danger-outline").prev().children("img").width();
+                $height=$(".btn-danger-outline").prev().children("img").height();
+                //.css("left","200px");
+                $widthparent= $(".btn-danger-outline").parent().width();
+                $heightparent= $(".btn-danger-outline").parent().height();
+
+                $(".btn-danger-outline").css("right",($widthparent-$width+10));
+                $(".btn-danger-outline").css("bottom",($heightparent-$height+10));
+                // alert($(".img1").width()+"aaa"+$(".img1").height());
+
+            </script>
+
+            {:C('WEB_SITE_STATISTICS')} <!-- 站点统计代码 -->
+        </div>
+    </div>
+
+</block>
+
+<script type="text/javascript" src="__JS__/api.js"></script>
+<script type="text/javascript" src="__JS__/aui-tab.js" ></script>
+<script type="text/javascript" src="__JS__/aui-slide.js"></script>
+<script type="text/javascript" src="__JS__/power-slider.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="__JS__/doT.min.js"></script>
+<script type="text/javascript" src="__JS__/config.js"></script>
+<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="__JS__/moya.js"></script>
+<script type="text/javascript" src="__JS__/aui-dialog.js"></script>
+

@@ -1,0 +1,13 @@
+
+<case value="link">
+    <div class="form-group item_{$[type]form.name} {$[type]form.extra.class|default=''}" style="margin-left: 10px">
+        <a href="{$form.url}"> {$form.name}</a>
+        <div class="right">
+           <notempty name="[type]form.tip">
+                <div>
+                    <span class="check-tips text-muted small">{$[type]form.tip|default=''}</span>
+                </div>
+            </notempty>
+        </div>
+    </div>
+</case>

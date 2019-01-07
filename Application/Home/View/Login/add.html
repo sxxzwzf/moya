@@ -1,0 +1,468 @@
+<extend name="Public/layout"/>
+
+<block name="style">
+    <style type="text/css">
+        body{
+            background: #e0e0e0;
+        }
+
+        .item-link:active {
+            -webkit-transition-duration: 0s;
+            transition-duration: 0s;
+            background-color: #d9d9d9
+        }
+
+        .col-40 {
+            width: 40%;
+
+        }
+        .col-60 {
+            width: 60%;
+
+        }
+        .background {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            background: #909090;
+            overflow: hidden;
+        }
+        .brand {
+            width: 100%;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        .brand a {
+            height: 65px;
+            font-size: 50px;
+            text-align: center;
+        }
+        .brand a:hover {
+            text-decoration: none;
+        }
+        .brand img.logo {
+            width: 100%;
+            max-height: 100px;
+            padding: 0 30px;
+            text-align: center;
+        }
+        .panel-lite {
+            margin: 5% auto;
+            max-width: 400px;
+            background: #fff;
+            padding: 45px 30px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .panel-lite h4 {
+            font-weight: 400;
+            font-size: 24px;
+            text-align: center;
+            color: #1685d0;
+            margin: 20px auto 35px;
+        }
+        .panel-lite a.link {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #1685d0;
+            font-size: 14px;
+        }
+        .form-group {
+            position: relative;
+            font-size: 15px;
+            color: #666;
+        }
+        .form-group + .form-group {
+            margin-top: 30px;
+        }
+        .form-group .form-label {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 5px;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+        .form-group .form-control {
+            width: 100%;
+            position: relative;
+            z-index: 3;
+            height: 35px;
+            background: none;
+            border: none;
+            padding: 5px 0;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            border-bottom: 1px solid #777;
+            box-shadow: none;
+            border-radius: 0;
+        }
+        .form-group .form-control:invalid {
+            outline: none;
+        }
+        .form-group .form-control:focus, .form-group .form-control:valid {
+            outline: none;
+            color: #1685d0;
+            box-shadow: 0 1px #1685d0;
+            border-color: #1685d0;
+        }
+        .form-group .form-control:focus + .form-label,
+        .form-group .form-control:valid + .form-label {
+            font-size: 12px;
+            -ms-transform: translateY(-15px);
+            -webkit-transform: translateY(-15px);
+            transform: translateY(-15px);
+        }
+        .floating-btn {
+            background: #1685d0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 32px;
+            border: none;
+            position: absolute;
+            margin: auto;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3) inset;
+            margin: auto;
+            right: -30px;
+            bottom: 90px;
+            cursor: pointer;
+        }
+        .floating-btn:hover {
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.3) inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 5px 11px rgba(0, 0, 0, 0.23);
+        }
+        .floating-btn:hover .icon-arrow {
+            -ms-transform: rotate(45deg) scale(1.2);
+            -webkit-transform: rotate(45deg) scale(1.2);
+            transform: rotate(45deg) scale(1.2);
+        }
+        .floating-btn:focus, .floating-btn:active {
+            outline: none;
+        }
+        .icon-arrow {
+            position: relative;
+            width: 13px;
+            height: 13px;
+            border-right: 3px solid #fff;
+            border-top: 3px solid #fff;
+            display: block;
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            margin: auto;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+        .icon-arrow:after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 3px;
+            background: #fff;
+            left: -5px;
+            top: 5px;
+            -ms-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        .verifyimg-box {
+            padding: 0;
+            border: 0;
+        }
+        .verifyimg-box .verifyimg {
+            cursor: pointer;
+            width: 130px;
+            height: 41px;
+            margin-top: -6px;
+            border-bottom: 1px solid #777;
+        }
+        @media (max-width: 768px) {
+            .background {
+                display: none;
+            }
+            .panel-lite {
+                box-shadow: none;
+                border-color: #fff;
+            }
+        }
+        .aui-icon-display:before
+        {
+            font-size: 20px;
+            position: absolute;
+            right:20px;
+            top: -11px;
+        }
+        .aui-icon-hide:before
+        {
+            font-size: 20px;
+            position: absolute;
+            right:20px;
+            top: -11px;
+        }
+        .fa-angle-left:before { content: "\e759"; }
+        .right{
+            width:150px;
+        }
+
+        .list-block .item-content {
+            box-sizing: border-box;
+            padding-left: 16px;
+            min-height: 48px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .item-inner
+        {
+            display: flex;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .item-title{
+            width: 80px;
+            height: 23px;
+            color:#fff;
+            line-height: 23px;
+            font-size: 17px;
+            padding:0px;
+            text-align:center;
+
+            font-weight: normal
+        }
+        .inputverify{
+            height: 35px;
+            width:60px;
+            padding: 0 10px;
+            margin: 0 15px 0 0;
+        }
+        .nickname{
+            height: 43px;
+            width: 220px;
+            padding: 0 15px;
+        }
+        .verifyimg{
+            height: 45px;
+        }
+    </style>
+</block>
+
+<block name="full-header"></block>
+
+
+<block name="full-header"></block>
+
+<block name="full-container">
+    <!-- 背景 -->
+    <div class="row col-xs-12" style="background: url(/Uploads/admin/image/2018-06-06/zhuce.jpg);height: 800px;margin: 0 auto;">
+
+        <div class="page no-toolbar user_user_register" data-page="user_user_register">
+            <div class="page-content">
+                <div class="brand" style="margin: 0px;">
+                    <php>if(C('WEB_SITE_LOGO')):</php>
+                    <a href="{:C('HOME_PAGE')}" target="_blank">
+                        <img alt="logo" style="width: 300px;margin: 30px auto;" class="logo img-responsive" src="<?php echo get_cover(C('WEB_SITE_LOGO')); ?>">
+                    </a>
+                    <php>else:</php>
+                    <a href="{:C('HOME_PAGE')}" target="_blank">
+                        {:C('LOGO_DEFAULT')}
+                    </a>
+                    <php>endif;</php>
+                </div>
+
+                <div class="tabs">
+                    <div id="reg-tab1" class="tab active" style="display: flex; justify-content:center;">
+                        <form action="index.php/user/user/register.html" style="width:300px;" method="post" class="form reg-form-username">
+                            <div class="list-block">
+                                <ul>
+                                    <input type="hidden" name="user_type" value="1">
+                                    <li>
+                                        <div class="item-content" style="margin: 0px;padding: 0px;">
+                                            <div class="item-inner"  style="margin: 0px;padding: 0px;">
+                                                <div class="item-title label" >昵称</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="nickname" class="nickname" autocomplete="off" placeholder="请输入昵称">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content" style="margin: 0px;padding: 0px;">
+                                            <div class="item-inner"  style="margin: 0px;padding: 0px;">
+                                                <div class="item-title label" >手机号</div>
+                                                <div class="item-input">
+                                                    <input type="text" name="username"  class="nickname"  autocomplete="off"  placeholder="请输入手机号">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="item-content"  style="margin: 0px;padding: 0px;position: relative">
+                                            <div class="item-inner"  style="margin: 0px;padding: 0px;">
+                                                <div class="item-title label"  >密码</div>
+                                                <div class="item-input">
+                                                    <input type="password" name="password" id="password"  class="nickname" autocomplete="off"   placeholder="请输入密码(6位到30位)">
+                                                </div>
+                                                <div class="aui-list-item-label-icon">
+                                                    <i class="aui-iconfont aui-icon-display" tapmode="" onclick="showPassword();" id="showpass-btn"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content"  style="margin: 0px;padding: 0px;">
+                                            <div class="item-inner"  style="margin: 0px;padding: 0px;">
+                                                <div class="item-title label" >验证码</div>
+                                                <input type="text" name="verify" class="inputverify"  placeholder="验证码">
+                                                <img  class="verifyimg reload-verify" alt="验证码" src="/index.php/home/login/verify.html" title="点击刷新">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group item_avatar "  style="display: flex;margin:10px;">
+                                            <label class="left control-label" style="width:120px;">
+                                                <span style="color:white;">代理授权书：</span>
+                                            </label>
+                                            <div class="right ">
+                                                <div id="_upload_box_9" class="wu-example">
+                                                    <!--用来存放文件信息-->
+                                                    <div id="_upload_list_9" class="uploader-list col-xs-12 img-box">
+                                                        <div id="_upload_preview_9" class="col-xs-12 col-sm-3 file-item ">
+                                                            <img src="" data-id="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="btns col-xs-12">
+                                                        <input type="hidden" id="_upload_input_9" name="authority" value="">
+                                                        <div id="_upload_9" class="btn btn-primary-outline btn-pill webuploader-container">
+                                                            <div class="webuploader-pick webuploader-pick-hover">上传代理授权书</div>
+                                                            <div id="rt_rt_1cgqgmuua1mh5ol918tkt9n4sj1" style="position: absolute; top: 6px; left: 12px; width: 56px; height: 20px; overflow: hidden; bottom: auto; right: auto;">
+                                                            <input type="file" name="file" class="webuploader-element-invisible" accept="image/gif,image/jpg,image/jpeg,image/png">
+                                                            <label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label>
+                                                        </div>
+                                                        </div>
+                                                        <button id="ctlBtn" class="btn btn-default hidden">开始上传</button>
+                                                        <span class="check-tips text-muted small"></span>                </div>
+                                                </div>
+
+                                                <script type="text/javascript" src="/Public/libs/webuploader/webuploader.js"></script>
+                                                <script type="text/javascript">
+                                                    $(function(){
+                                                        var uploader__upload_9 = WebUploader.create({
+                                                            withCredentials: true,                                                             // 跨域请求提供凭证
+                                                            auto: true,                                                                        // 选完文件后，是否自动上传
+                                                            duplicate: true ,                                                               // 同一文件是否可以重复上传
+                                                            server: '{:U(MODULE_MARK."/Guestupload/upload", array("dir" => "image", "module_name" => request()->module() ), true, true)}',
+                                                            pick: '#_upload_9',                            // 选择文件的按钮
+                                                            resize: false,                                                                     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                                                            //fileNumLimit: 1,                                                                 // 验证文件总数量, 超出则不允许加入队列
+                                                            fileSingleSizeLimit:5*1024*1024, // 验证单个文件大小是否超出限制, 超出则不允许加入队列
+                                                            // 文件过滤
+                                                            accept: {
+                                                                title: 'Images',
+                                                                extensions: "gif,jpg,jpeg,bmp,png",
+                                                                mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+                                                            }
+                                                        });
+
+                                                        // 文件上传过程中创建进度条实时显示。
+                                                        uploader__upload_9.on( 'uploadProgress', function(file, percentage ) {
+                                                            $('#_upload_preview_9').removeClass('hidden');
+                                                            var $li = $( '#_upload_preview_9'),
+                                                                $percent = $li.find('.progress .progress-bar');
+                                                            // 避免重复创建
+                                                            if ( !$percent.length ) {
+                                                                $percent = $('<div class="progress"><div class="progress-bar"></div></div>')
+                                                                    .appendTo( $li )
+                                                                    .find('.progress-bar');
+                                                            }
+                                                            $percent.css('width', percentage * 100 + '%');
+                                                        });
+
+                                                        // 完成上传完了，成功或者失败，先删除进度条。
+                                                        uploader__upload_9.on('uploadComplete', function(file) {
+                                                            $( '#_upload_preview_9' ).find('.progress').remove();
+                                                        });
+
+                                                        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+                                                        uploader__upload_9.on('uploadSuccess', function(file , response) {
+                                                            $('#_upload_preview_9').addClass('upload-state-done');
+                                                            if (eval('response').status == 0) {
+                                                                $.alertMessager(response.message);
+                                                            } else {
+                                                                $( '#_upload_input_9').attr('value', response.id);
+                                                                $( '#_upload_preview_9 img').attr('src', response.url);
+                                                            }
+                                                        });
+
+                                                        // 上传错误
+                                                        uploader__upload_9.on("error",function (type){
+                                                            if (type=="Q_TYPE_DENIED") {
+                                                                $.alertMessager('该文件格式不支持');
+                                                            } else if(type=="F_EXCEED_SIZE") {
+                                                                $.alertMessager("文件大小不允许超过5MB");
+                                                            } else if(type=="Q_EXCEED_NUM_LIMIT") {
+                                                                $.alertMessager("超过允许的文件数量");
+                                                            } else {
+                                                                $.alertMessager(type);
+                                                            }
+                                                        });
+
+                                                        // 文件上传失败，显示上传出错。
+                                                        uploader__upload_9.on('uploadError', function(file) {
+                                                            $.alertMessager('error');
+                                                            var $li = $('#_upload_preview_9'),
+                                                                $error = $li.find('div.error');
+                                                            // 避免重复创建
+                                                            if (!$error.length) {
+                                                                $error = $('<div class="error"></div>').appendTo($li);
+                                                            }
+                                                            $error.text('上传失败');
+                                                        });
+
+                                                        // 删除图片
+                                                        $(document).on('click', '#_upload_list_9 .remove-picture', function() {
+                                                            $('#_upload_input_9' ).val('') //删除后覆盖原input的值为空
+                                                            $('#_upload_preview_9').addClass('hidden');
+                                                        });
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="list-block">
+                                <input type="hidden" name="reg_type" value="username">
+                                <ul style="background: #fff;height: 43px;">
+                                    <li><a href="#" type="submit" class="submit item-link list-button ajax-post" target-form="reg-form-username" style="line-height: 43px;text-align: center;display: block;cursor: pointer;">注册</a></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</block>
+<block name="hook_page_footer"></block>
+<block name="footer"></block>

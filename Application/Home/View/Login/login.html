@@ -1,0 +1,322 @@
+<extend name="Public/layout"/>
+<block name="toplinkscript">
+    <link rel="shortcut icon" type="image/x-icon" href="__ROOT__/favicon.ico">
+    <link rel="apple-touch-icon" type="image/x-icon" href="__ROOT__/logo.png">
+
+
+    <link rel="stylesheet" type="text/css" href="__LYUI__/css/lyui.min.css">
+
+    <link rel="stylesheet" type="text/css" href="__HOME_CSS__/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="__HOME_CSS__/bootstrap-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="__HOME_CSS__/moya.css"/>
+
+    <script type="text/javascript" src="__JS__/jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" src="__JS__/admin.js" ></script>
+    <script type="text/javascript" src="__JS__/moya.js" ></script>
+    <script type="text/javascript" src="__JS__/api.js" ></script>
+    <script type="text/javascript" src="__LYUI__/js/lyui.min.js"></script>
+
+</block>
+<block name="myscript"></block>
+<block name="style">
+
+    <style type="text/css">
+        body
+        {
+            padding: 0;
+            margin: 0;
+
+        }
+        .background {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            overflow: auto;
+            background: url("/Uploads/admin/image/2018-06-06/2365.png") no-repeat   transparent ;
+            background-size: 100% 100%;
+            position: absolute;
+            margin:0;
+            left:0;
+            top:0;
+        }
+        .brand {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .brand a {
+            height: 65px;
+            font-size: 50px;
+            text-align: center;
+        }
+        .brand a:hover {
+            text-decoration: none;
+        }
+        .brand img.logo {
+            width: 100%;
+            max-height: 100px;
+            padding: 0 30px;
+            text-align: center;
+        }
+        .panel-lite {
+            margin: 5% auto;
+            max-width: 400px;
+            background: #fff;
+            padding: 45px 30px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .panel-lite h4 {
+            font-weight: 400;
+            font-size: 24px;
+            text-align: center;
+            color: #1685d0;
+            margin: 20px auto 35px;
+        }
+        .panel-lite a.link {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #1685d0;
+            font-size: 14px;
+        }
+        .form-group {
+            position: relative;
+            font-size: 15px;
+            color: #666;
+        }
+        .form-group + .form-group {
+            margin-top: 30px;
+        }
+        .form-group .form-label {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 5px;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+        .form-group .form-control {
+            width: 100%;
+            position: relative;
+            z-index: 3;
+            height: 35px;
+            background: none;
+            border: none;
+            padding: 5px 0;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            border-bottom: 1px solid #777;
+            box-shadow: none;
+            border-radius: 0;
+        }
+        .form-group .form-control:invalid {
+            outline: none;
+        }
+        .form-group .form-control:focus, .form-group .form-control:valid {
+            outline: none;
+            color: #1685d0;
+            box-shadow: 0 1px #1685d0;
+            border-color: #1685d0;
+        }
+        .form-group .form-control:focus + .form-label,
+        .form-group .form-control:valid + .form-label {
+            font-size: 12px;
+            -ms-transform: translateY(-15px);
+            -webkit-transform: translateY(-15px);
+            transform: translateY(-15px);
+        }
+        .floating-btn {
+            background: #1685d0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 32px;
+            border: none;
+            position: absolute;
+            margin: auto;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3) inset;
+            margin: auto;
+            right: -30px;
+            bottom: 90px;
+            cursor: pointer;
+        }
+        .floating-btn:hover {
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.3) inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 5px 11px rgba(0, 0, 0, 0.23);
+        }
+        .floating-btn:hover .icon-arrow {
+            -ms-transform: rotate(45deg) scale(1.2);
+            -webkit-transform: rotate(45deg) scale(1.2);
+            transform: rotate(45deg) scale(1.2);
+        }
+        .floating-btn:focus, .floating-btn:active {
+            outline: none;
+        }
+        .icon-arrow {
+            position: relative;
+            width: 13px;
+            height: 13px;
+            border-right: 3px solid #fff;
+            border-top: 3px solid #fff;
+            display: block;
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            margin: auto;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+        .icon-arrow:after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 3px;
+            background: #fff;
+            left: -5px;
+            top: 5px;
+            -ms-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        .verifyimg-box {
+            padding: 0;
+            border: 0;
+        }
+        .verifyimg-box .verifyimg {
+            cursor: pointer;
+            width: 130px;
+            height: 41px;
+            margin-top: -6px;
+            border-bottom: 1px solid #777;
+        }
+        @media (max-width: 768px) {
+            .background {
+                display: none;
+            }
+            .panel-lite {
+                box-shadow: none;
+                border-color: #fff;
+            }
+        }
+        .icon-user{
+            position: absolute;
+            font-family: "aui_iconfont" !important;
+            font-style:normal;
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+            width: 40px;
+            height: 40px;
+            left:15px;
+            top:3px;
+
+        }
+        .icon-password{
+            position: absolute;left: 0；z-index:5;
+            font-family: "aui_iconfont" !important;
+            font-style:normal;
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+            width: 40px;
+            height: 40px;
+            left:15px;
+            top:53px;
+
+        }
+        .icon-user2{
+            position: absolute;left: 0；z-index:5;
+            font-family: "aui_iconfont" !important;
+            font-style:normal;
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+            width: 40px;
+            height: 40px;
+            left:240px;
+            top:53px;
+
+        }
+
+        .icon-user:before {
+            content: "\e610";
+        }
+        .icon-password:before {
+            content: "\e6ef";
+        }
+
+        .aui-icon-display:before { content: "\e612"; }
+        .aui-icon-hide:before { content: "\e624"; }
+        .verifyimg
+        {
+            max-width: 100%;
+        }
+        .phonenumber{
+            padding-left: 50px;
+            width:280px;
+            height:40px;
+            border:1px solid #000;
+            border-radius: 3px;
+        }
+    </style>
+</block>
+<block name="topnav"></block>
+<block name="full-header"></block>
+
+<block name="full-container">
+    <!-- 背景 -->
+    <div class="row col-xs-12" style="background: url(/Uploads/admin/image/2018-06-06/2345.jpg);height: 800px;margin: 0 auto;display: flex;justify-content: center;">
+
+        <div class="panel-lite row" style="background: transparent;margin:0">
+            <div class="brand">
+                <php>if(C('WEB_SITE_LOGO')):</php>
+                <a href="{:C('HOME_PAGE')}" target="_blank">
+                    <img alt="logo" class="logo img-responsive" src="<?php echo get_cover(C('WEB_SITE_LOGO')); ?>">
+                </a>
+                <php>else:</php>
+                <a href="{:C('HOME_PAGE')}" target="_blank">
+                    {:C('LOGO_DEFAULT')}
+                </a>
+                <php>endif;</php>
+            </div>
+            <h4 style="color:#fff">用户登录</h4>
+
+            <form class="login-form col-xs-12" style="width: 300px;margin: 0 auto;float:none" action="{:U('')}" method="post" >
+                <div  >
+
+                    <i class="icon-user " style="font-size: 25px"></i>
+                    <input type="text" class="phonenumber"  required="required"  placeholder="请输入手机号" name="username" autocomplete="off" value="{$_GET['account']}">
+                </div>
+                <div>
+                    <i class="icon-password" style="font-size: 25px"></i>
+                    <input  readonly onfocus="this.removeAttribute('readonly');" type="password" autocomplete="false" id="password" style="padding-left: 50px;margin:10px 0px;width:280px;height:40px;border:1px solid #000;border-radius: 3px;" placeholder="请输入密码" required="required" class=" " name="password" value="{$_GET['password']}">
+                    <i class="icon-user2 aui-iconfont aui-icon-display" style="font-size: 25px" tapmode="" onclick="showPassword();" id="showpass-btn"></i>
+                </div>
+
+                <div class="input-group" style="display: flex;align-items:center;">
+                    <input type="text" placeholder="输入验证码" required="required" class=" " style="padding:15px;margin:10px 0px;height:40px;border:1px solid #000;border-radius: 3px;width:100px;" name="verify">
+
+                    <div  style="display: block;margin:0 10px;height:52px;">
+                        <img class="verifyimg reload-verify"  onclick="" alt="验证码" src="{:U('Home/Login/verify')}" title="点击刷新">
+                    </div>
+
+                </div>
+
+                <div class="form-group  col-xs-10" style="width:280px;background-color: #0b7fd1;color:#fff;margin: 20px 0px;">
+                    <a type="submit" style="color:#fff" class="visible-xs btn btn-primary-outline btn-block btn-pill btn-lg ajax-post" target-form="login-form">登录</a>
+                </div>
+                <a class="link" target="_self" href="/home/login/changepwd.html" style="color:#fff;">忘记密码 ? </a> <a class="link" target="_self" href="/Home/login/add.html" style="float:right; color:#fff;"> 注册新用户 </a>
+                <button type="submit" class="floating-btn ajax-post hidden-xs" target-form="login-form">
+                    <i class="icon-arrow"></i>
+                </button>
+            </form>
+        </div>
+
+
+    </div>
+</block>
+<block name="hook_page_footer"></block>
+<block name="footer"></block>

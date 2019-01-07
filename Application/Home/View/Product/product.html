@@ -1,0 +1,73 @@
+<extend name="$_home_public_layout"/>
+<block name="style">
+
+<style>
+
+    .productcover{
+
+    }
+    .listrow{
+        display: flex;
+        padding: 10px;
+        margin: 0 10px;
+        border-bottom:1px solid #dddddd;
+
+        font-size:14px;
+        align-items:center;
+
+
+    }
+    .listrow:active {
+        background-color: #f5f5f5;
+    }
+    .aui-list-item-arrow:before {
+        top:50%;
+        position: absolute;
+        font-size: 20px;
+        width: 8px;
+        height: 8px;
+        right:20px;
+    }
+    .aui-list-item-arrow {
+        position: relative;
+     }
+    a:visited{
+        color: black;
+    }
+    a:link {
+
+        color: #000000;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+
+</style>
+</block>
+<block name="full-container" >
+<div   style="padding: 0px">
+
+
+    <volist name="product"   id="vo">
+
+        <a href="details/id/{$vo.id}">
+            <div class="row listrow aui-list-item aui-list-item-arrow"  >
+                <div class="productcover ">
+                    <img src="{$vo.cover_url}" style="width: 60px;height: 40px">
+                </div>
+                <div style="margin:3px 10px">
+                    <div>{$vo.title}</div>
+                    <div>产品价格:{$vo.price}元</div>
+                </div>
+            </div>
+        </a>
+    </volist>
+
+    </div>
+<div style="height: 40px;"></div>
+</block>
+
+
+</body>
+</html>

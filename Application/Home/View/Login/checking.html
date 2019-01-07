@@ -1,0 +1,225 @@
+<extend name="$_home_public_layout"/>
+<block name="style">
+    <include file="./Application/Common/util/lyf/builder/style.html" />
+   <style>
+       .webuploader-container
+       {
+           background-color: #198cff;
+           color: white;
+       }
+       img{
+           max-width: 200px;
+           margin-bottom:20px ;
+       }
+       .control-label
+       {
+           width: 100px;
+       }
+       .control-labeldaili
+       {
+           width: 200px;
+       }
+       .form-group
+       {
+           display: flex;
+           -webkit-align-items: center;
+           align-items: center;
+       }
+   </style>
+</block>
+<block name="main">
+     <div class="container m-b">
+        <div class="panel-body bg-white">
+            <div class="builder formbuilder-box">
+                <div class="builder-container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <php>if(!$userinfo["authority"]):</php>
+                            <div style="color: red">您还未上传授权证书，请上传否则不予审核！</div>
+                            <php>endif;</php>
+                            <form action="" method="post" class="form-horizontal form form-builder">
+                                <div class="form-type-list">
+                                    <div class="form-group hidden item_id ">
+                                       <div class="right">
+                                            <input type="hidden" class="form-control input" name="id" value="{$userinfo.id}">
+                                        </div>
+                                    </div><div class="form-group item_username ">
+                                    <label class="left control-label">
+                                        <span>手机号：</span>
+                                    </label>
+                                    <div class="right" style="margin-top: 7px;">
+                                        <p style="font-size: 18px;">{$userinfo.username}</p>
+                                    </div>
+                                </div>
+                                    <div class="form-group hidden item_username ">
+                                    <label class="left control-label">
+                                        <span>手机号：</span>
+                                    </label>
+                                    <div class="right">
+                                        <input type="hidden" class="form-control input" name="username" value="{$userinfo.username}">
+                                    </div>
+                                </div><div class="form-group item_nickname ">
+                                    <label class="left control-label">
+                                         <span>昵称：</span>
+                                    </label>
+                                    <div class="right" style="margin-top: 7px;">
+                                        <p style="font-size: 18px;">{$userinfo.nickname}</p>
+                                    </div>
+                                </div><div class="form-group item_authority " style="display: flex">
+                                    <label class="left control-labeldaili">
+                                        <span>代理商授权证书：</span>
+                                    </label>
+                                    <div class="form-group item_avatar " >
+
+                                        <div class="right ">
+                                            <div id="_upload_box_9" class="wu-example">
+                                                <!--用来存放文件信息-->
+                                                <div id="_upload_list_9" class="uploader-list col-xs-12 img-box">
+                                                    <div id="_upload_preview_9" class="col-xs-12 col-sm-3 file-item ">
+                                                        <img src="{$picinfo.path}" data-id="$picinfo.id">
+                                                    </div>
+                                                </div>
+                                                <div class="btns col-xs-12">
+                                                    <input type="hidden" id="_upload_input_9" name="authority" value="{$picinfo.id}">
+                                                    <div id="_upload_9" class="btn btn-primary-outline btn-pill webuploader-container">
+                                                        <div class="webuploader-pick webuploader-pick-hover">上传代理授权书</div>
+                                                        <div id="rt_rt_1cgqgmuua1mh5ol918tkt9n4sj1" style="position: absolute; top: 6px; left: 12px; width: 56px; height: 20px; overflow: hidden; bottom: auto; right: auto;">
+                                                            <input type="file" name="file" class="webuploader-element-invisible" accept="image/gif,image/jpg,image/jpeg,image/png">
+                                                            <label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label>
+                                                        </div>
+                                                    </div>
+                                                    <button id="ctlBtn" class="btn btn-default hidden">开始上传</button>
+                                                    <span class="check-tips text-muted small"></span>                </div>
+                                            </div>
+
+                                            <script type="text/javascript" src="/Public/libs/webuploader/webuploader.js"></script>
+                                            <script type="text/javascript">
+                                                $(function(){
+                                                    var uploader__upload_9 = WebUploader.create({
+                                                        withCredentials: true,                                                             // 跨域请求提供凭证
+                                                        auto: true,                                                                        // 选完文件后，是否自动上传
+                                                        duplicate: true ,                                                               // 同一文件是否可以重复上传
+                                                        server: '{:U(MODULE_MARK."/Guestupload/upload", array("dir" => "image", "module_name" => request()->module() ), true, true)}',
+                                                        pick: '#_upload_9',                            // 选择文件的按钮
+                                                        resize: false,                                                                     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                                                        //fileNumLimit: 1,                                                                 // 验证文件总数量, 超出则不允许加入队列
+                                                        fileSingleSizeLimit:5*1024*1024, // 验证单个文件大小是否超出限制, 超出则不允许加入队列
+                                                        // 文件过滤
+                                                        accept: {
+                                                            title: 'Images',
+                                                            extensions: "gif,jpg,jpeg,bmp,png",
+                                                            mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+                                                        }
+                                                    });
+
+                                                    // 文件上传过程中创建进度条实时显示。
+                                                    uploader__upload_9.on( 'uploadProgress', function(file, percentage ) {
+                                                        $('#_upload_preview_9').removeClass('hidden');
+                                                        var $li = $( '#_upload_preview_9'),
+                                                            $percent = $li.find('.progress .progress-bar');
+                                                        // 避免重复创建
+                                                        if ( !$percent.length ) {
+                                                            $percent = $('<div class="progress"><div class="progress-bar"></div></div>')
+                                                                .appendTo( $li )
+                                                                .find('.progress-bar');
+                                                        }
+                                                        $percent.css('width', percentage * 100 + '%');
+                                                    });
+
+                                                    // 完成上传完了，成功或者失败，先删除进度条。
+                                                    uploader__upload_9.on('uploadComplete', function(file) {
+                                                        $( '#_upload_preview_9' ).find('.progress').remove();
+                                                    });
+
+                                                    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+                                                    uploader__upload_9.on('uploadSuccess', function(file , response) {
+                                                        $('#_upload_preview_9').addClass('upload-state-done');
+                                                        if (eval('response').status == 0) {
+                                                            $.alertMessager(response.message);
+                                                        } else {
+                                                            $( '#_upload_input_9').attr('value', response.id);
+                                                            $( '#_upload_preview_9 img').attr('src', response.url);
+                                                        }
+                                                    });
+
+                                                    // 上传错误
+                                                    uploader__upload_9.on("error",function (type){
+                                                        if (type=="Q_TYPE_DENIED") {
+                                                            $.alertMessager('该文件格式不支持');
+                                                        } else if(type=="F_EXCEED_SIZE") {
+                                                            $.alertMessager("文件大小不允许超过5MB");
+                                                        } else if(type=="Q_EXCEED_NUM_LIMIT") {
+                                                            $.alertMessager("超过允许的文件数量");
+                                                        } else {
+                                                            $.alertMessager(type);
+                                                        }
+                                                    });
+
+                                                    // 文件上传失败，显示上传出错。
+                                                    uploader__upload_9.on('uploadError', function(file) {
+                                                        $.alertMessager('error');
+                                                        var $li = $('#_upload_preview_9'),
+                                                            $error = $li.find('div.error');
+                                                        // 避免重复创建
+                                                        if (!$error.length) {
+                                                            $error = $('<div class="error"></div>').appendTo($li);
+                                                        }
+                                                        $error.text('上传失败');
+                                                    });
+
+                                                    // 删除图片
+                                                    $(document).on('click', '#_upload_list_9 .remove-picture', function() {
+                                                        $('#_upload_input_9' ).val('') //删除后覆盖原input的值为空
+                                                        $('#_upload_preview_9').addClass('hidden');
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>                                                <div class="form-group"></div>
+                                    <div class="bottom_button_list">
+                                        <a class="btn btn-primary submit ajax-post" type="submit" target-form="form-builder">确定</a>
+                                        <!--底部按钮-->
+                                        <a class="btn btn-danger return" onclick="javascript:logout();">退出</a>
+                                        <script type="text/javascript">
+                                            $('a[type="submit"]').click(function(){
+                                                if (!$(this).hasClass('ajax-post')) {
+                                                    $("form.form-builder").submit();
+
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</block>
+<block name="myscript">
+    <script>
+        function logout() {
+            ajax({url:Config.api.UserLoginOut,data:{} },function(data){
+                if (data.code == 1) {
+                    //清空session跳转到登录页面
+                    sessionStorage.clear();
+                    window.location.href="../login/login.html";
+                }
+            })
+        }
+
+    </script>
+
+</block>
+
+<block name="footer"></block>
+<block name="script">
+
+</block>

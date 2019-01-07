@@ -1,0 +1,48 @@
+<extend name="$_home_public_layout"/>
+<block name="style">
+
+<style>
+
+    .product
+    {
+        border: 1px #eeeeee solid;
+        padding: 4px;
+        padding-left:20px ;
+        border-left: none;
+        border-right: none;
+    }
+    .name{
+        color:#888888;
+    }
+    .content{
+        margin: 10px;
+    }
+
+</style>
+</block>
+<block name="full-container" >
+<div  style="padding: 0px">
+
+
+
+
+
+    <div   >
+        <div class="productcover col-xs-12" >
+            <img src="{$product.cover_url}"  style="width: 100%;">
+        </div>
+    </div>
+    <div class="product">产品详情</div>
+    <div class="product name">产品名称：{$product.title}</div>
+    <div class="product name" >全国统一零售价：{$product.price}元</div>
+    <div class="product" style="text-align: center">产品简介</div>
+
+    <div class="content">{$product.content}</div>
+
+    </div>
+<div style="height: 40px;"></div>
+</block>
+
+
+</body>
+</html>

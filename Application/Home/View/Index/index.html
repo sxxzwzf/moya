@@ -1,0 +1,415 @@
+<extend name="$_home_public_layout"/>
+
+<block name="style">
+    <style type="text/css">
+        /* 主要内容 */
+        #main {
+            padding: 0;
+        }
+
+        /* 幻灯片 */
+        #index-carousel .carousel-inner .item,
+        #index-carousel .carousel-inner img {
+            width: 100%;
+
+        }
+        #index-carousel .item-default .btn {
+            color: #fff;
+            border-color: #fff;
+        }
+        #index-carousel .item-default .btn:hover {
+            color: #333;
+            background: #fff;
+        }
+        @media (max-width: 768px) {
+            #index-carousel .carousel-inner .item,
+            #index-carousel .carousel-inner img {
+                /*height: 200px;*/
+            }
+        }
+
+        /* section */
+        .section {
+            padding: 30px 0;
+        }
+        .section .section-title {
+            font-size: 36px;
+            color: #464c5b;
+            margin-bottom: 20px;
+        }
+        .section .section-abstract {
+            font-size: 20px;
+            color: #657180;
+            line-height: 2;
+            margin-bottom: 40px;
+        }
+        @media (min-width: 768px) {
+            .section {
+                height: 560px;
+            }
+        }
+        @media (max-width: 768px) {
+            .section .section-title {
+                font-size: 26px;
+                margin: 0;
+                margin-bottom: 8px;
+            }
+            .section .section-abstract {
+                font-size: 15px;
+                margin-bottom: 30px;
+            }
+        }
+
+        /* 功能 */
+        .function-list>.col-xs-12 button.btn {
+            width: 180px;
+            height: 180px;
+        }
+        @media (max-width: 768px) {
+            .function-list>.col-xs-12 button.btn {
+                width: 120px;
+                height: 120px;
+            }
+            .function-list>.col-xs-12 button.btn .fa-5x {
+                font-size: 40px;
+            }
+        }
+
+        /* 优秀特性 */
+        .feature-list .col-sm-2 {
+            width: 20%;
+        }
+        .feature-list .feature-item {
+            color: #667588;
+            border: 0px solid #fff;
+        }
+        .feature-list .feature-item > span {
+            display: inline-block;
+            padding: 10px 22px;
+            margin:20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .feature-list .feature-item > span:focus,
+        .feature-list .feature-item > span:hover {
+            box-shadow: none!important;
+            transform: translateY(5px);
+        }
+        .feature-list .feature-item .fa {
+            font-size: 60px;
+            font-weight: bold;
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .feature-list .col-xs-4 {
+                width: 50%;
+            }
+            .feature-list .feature-item p {
+                font-size: 12px;
+            }
+            .feature-list .feature-item .fa {
+                font-size: 40px;
+            }
+        }
+
+        /* 数据统计 */
+        .statistics-list .col-xs-12 button.btn {
+            width: 220px;
+            height: 220px;
+        }
+        @media (max-width: 768px) {
+            .statistics-list .col-xs-12 button.btn {
+                width: 90px;
+                height: 90px;
+            }
+            .statistics-list .numberGrow {
+                font-size: 20px;
+            }
+        }
+
+        /* 新闻资讯 */
+        .news ul li {
+            padding: 5px 0;
+        }
+
+        .sliderbox{
+            position:relative;
+
+        }
+        .text{
+            height:30px;
+            width:200px;
+            overflow: hidden;
+            position: relative;
+            margin:20px auto;
+            height: 60px;
+            width: 100%;
+            border-radius: 10px;
+            background-color: #3399ff;
+            margin: 0px;
+        }
+        .text li{
+            line-height:60px; height: 60px;  white-space: nowrap; overflow: hidden; text-overflow:ellipsis;
+            text-align: center;
+            color: white;
+        }
+        .text li a{
+           margin: 0 auto;
+        }
+        .thumbnail{
+            border-radius: 10px;
+        }
+    </style>
+</block>
+
+<block name="jumbotron">
+    <div id="index-carousel" class="carousel slide container col-xs-12" data-ride="carousel" style="margin: 0px;padding: 0px;" >
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <lingyun:slider_list name="slider">
+                <div class="item <php>if($i == 1) echo 'active';</php>">
+                    <a target="{$slider.target}" href="{$slider.url}"><img class="item-bg" src="{$slider.cover|get_cover}"></a>
+                </div>
+            </lingyun:slider_list>
+            <?php if(!$__SLIDER_LIST__): ?>
+                <div class="item item-default active">
+                    <img src="__HOME_IMG__/index/banner.jpg" alt="魔娅">
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <?php if($__SLIDER_LIST__): ?>
+            <!-- 幻灯片导航 -->
+            <ol class="carousel-indicators">
+                <lingyun:slider_list name="slider">
+                    <li class="<php> if($i==1) echo 'active';</php>" data-target="#index-carousel" data-slide-to="<?php echo $i-1; ?>"></li>
+                </lingyun:slider_list>
+            </ol>
+
+            <!-- 左右切换按钮 -->
+            <a class="left carousel-control hidden-xs" href="#index-carousel" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+            <a class="right carousel-control hidden-xs" href="#index-carousel" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+        <?php endif; ?>
+    </div>
+</block>
+
+<block name="topnav"></block>
+
+<block name="full-container">
+    <div class="clearfix full-wrap">
+        <div class="clearfix full-header">
+
+
+
+        </div>
+
+        <div class="clearfix full-container" style="margin: 10px 5px 10px">
+
+                <!--
+                    <div class="jumbotron jumbotron-primary jumbotron-background main-jumbotron text-center m-b-sm">
+                        <h4>简单、高效、卓越 － <span class="small">{:C('WEB_SITE_SLOGAN')}</span></h4>
+                    </div>
+                -->
+
+
+
+                <!-- 子域名部署支持 -->
+                <?php if(request()->controller() === 'Index' && request()->action() === 'index'): ?>   <!-- 如果是模块首不显示面包屑导航 -->
+
+                <?php else: ?>
+                <div class="container">
+                    <ol class="breadcrumb main-breadcrumb">
+                        <li><a href="{:C('TOP_HOME_PAGE')}"><i class="fa fa-home"></i></a></li>
+                        <?php if($_current_module): ?>
+                        <li><a href="{:U('/' . request()->module(), '', true, true)}"><?php echo $_current_module; ?>333333333</a></li>
+                        <?php endif; ?>
+                        <li class="active">{$meta_title}</li>
+                    </ol>
+                </div>
+                <?php endif; ?>
+
+
+
+            <div id="main container" class="col-xs-12">
+                <div  >
+                    <div class="col-xs-12 text"  id="text" >
+                        <ul id="scrolltext" class="sliderbox">
+                          </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div >
+            <div >
+
+                <div class="col-xs-6">
+                    <a href="/home/picture/category/cid/1.html">
+                        <img src="__IMG__/index/1.png" class="thumbnail" width="100%">
+                    </a>
+
+                </div>
+
+                <div class="col-xs-6">
+                    <a href="/home/picture/category/cid/2.html">
+                    <img src="__IMG__/index/2.png" class="thumbnail"  width="100%" >
+                    </a>
+                </div>
+            </div>
+
+            <div    style="" >
+                <div class="col-xs-4">
+                    <a href="/home/product/product">
+                        <img src="__IMG__/index/3.png" class="thumbnail"  width="100%">
+                    </a>
+                </div>
+
+                <div class="col-xs-4">
+                    <a href="/home/picture/categoryzhijian/cid/16.html">
+                    <img src="__IMG__/index/4.png" class="thumbnail"  width="100%" >
+                    </a>
+                </div>
+                <div class="col-xs-4 ">
+                    <a href="/home/article/detail/id/2.html">
+                    <img src="__IMG__/index/5.png" class="thumbnail"   width="100%" >
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+
+
+
+        </div>
+
+        <div class="clearfix full-foooter">
+
+        </div>
+    </div>
+</block>
+
+<block name="myscript">
+
+    <script type="text/javascript">
+
+        $(function () {
+            slideList();
+            getNews();
+            //逐行滚动
+
+        });
+
+
+        /**
+         * 底部切换
+         */
+        var tab = new auiTab({
+            element:document.getElementById("footer"),
+            index:1,
+            repeatClick:false
+        },function(ret){
+            switch (ret.index){
+                case 1:
+                    window.location.href = "../home/index.html";
+                    break;
+                case 2:
+                    window.location.href = "/home/picture/categoryfirst.html";
+                    break;
+                case 3:
+                    window.location.href = "/home/my/index.html";
+                    break;
+            }
+        });
+
+        //幻灯片的获取
+        function slideList(){
+            var param = {};
+            param.url = Config.api.Toolsslides;
+            param.data = {
+                'id' : 1
+            };
+            ajax(param,function (ret) {
+                if(ret.code == 1){
+                    var dataInter = ret.data[0].items;
+
+                    var slide = new auiSlide({
+                        container:document.getElementById("aui-slide"),
+                        "height":150,
+                        "speed":300,
+                        "autoPlay": 5000, //自动播放
+                        "pageShow":true,
+                        "loop":true,
+                        "pageStyle":'dot',
+                        'dotPosition':'center'
+                    });
+                }else{
+                    layer.msg(ret.msg);
+                }
+            })
+        }
+
+        //获取资讯
+        function getNews(){
+            var param = {};
+            param.url = Config.api.NewsList;
+            param.data = {
+                'field':'id,post_title',
+                'limit':4
+            };
+            ajax(param,function (ret) {
+                console.log(ret);
+                if(ret.code == 1){
+                    var html="";
+                    $.each(ret.data,function (index,item) {
+                        html += "<li onclick='details("+item['id']+")'>"+item['post_title']+"</li>";
+                    });
+                    $("#scrolltext").append(html);
+                }else{
+                    layer.msg(ret.msg);
+                }
+                $("#text").powerSlider({handle:"top",speed:300,delayTime:2000,clickMode:"mouseover",sliderNum:1});
+            })
+        }
+
+        //详情
+        function details(id) {
+            sessionStorage.setItem('id',id);
+            window.location.href = "/home/notice/details/id/"+id+".html";
+        }
+
+
+
+        //代理商图库
+        function agent() {
+            window.location.href = '../category/agent.html';
+        }
+
+
+    </script>
+
+</block>
+
+
+<block name="script">
+    <script type="text/javascript" >
+        $(function(){
+            // 数据统计动画
+            $('.numberGrow').on('scrollSpy:enter', function() {
+                $.numberGrow(this);
+            });
+            $('.numberGrow').scrollSpy();
+
+            // 特性详情
+            $('.feature-item').hover(function() {
+                $(this).children('.feature-cover').addClass('active');
+            }, function() {
+                $(this).children('.feature-cover').removeClass('active');
+            });
+        });
+    </script>
+</block>
